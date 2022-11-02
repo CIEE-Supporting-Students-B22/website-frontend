@@ -1,0 +1,15 @@
+.column-div {
+    background-color: #005CB9;
+    border: 2px solid #FF5F00;
+
+}
+
+.column-div:hover {
+    background-color: #0256a8;
+}
+
+.homepage-parent {
+    display:grid;
+    grid-template-columns: auto auto;
+    grid-gap: 50px;
+}

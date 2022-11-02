@@ -1,24 +1,21 @@
-import logo from './logo.svg';
+import logo from './assets/CIEE_Logo.png';
 import './App.css';
+import Homepage from './pages/Homepage.js'
+import ThingsToDo from "./pages/ThingsToDo.js";
+import React from 'react';
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+          <div className="App">
+              <Link to="/"><img src={logo} alt={"Logo"} className="ciee-logo"/></Link>
+              <Routes>
+                  <Route path="/" element={<Homepage/>} />
+                  <Route path="/things-to-do" element={<ThingsToDo />} />
+              </Routes>
+          </div>
+      </BrowserRouter>
   );
 }
 
