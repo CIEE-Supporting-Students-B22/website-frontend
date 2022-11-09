@@ -11,6 +11,7 @@ class Homepage extends React.Component {
                 <Link className="column-div" to="/language-prep">Language Prep</Link>
                 <Link className="column-div" to="/using-services">Utilizing Services in the Czech Republic</Link>
                 <Link className="column-div" to="/upcoming-trips">Upcoming trips offered by CIEE Prague</Link>
+                <Link className="column-div" to="/admin-panel">Admin Panel (Temporary for Development Purposes)</Link>
             </div>
         );
     }

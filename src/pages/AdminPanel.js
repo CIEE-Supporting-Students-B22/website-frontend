@@ -30,7 +30,8 @@ class AdminPanel extends React.Component {
                 <h2>Current posts</h2>
                 <div className="managed-pages">
                     <>
-                        {this.state.data.map(d => <ManagementBlock title={d.title} postType={d.postType} />)}
+                        {this.state.loaded ? this.state.data.map(d => <ManagementBlock title={d.title} postType={d.postType} />) :
+                        <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>}
                     </>
                 </div>
             </div>
