@@ -1,11 +1,16 @@
 import React from "react";
 import PostBlock from "../components/PostBlock";
 import './styles/ThingToDo.css';
+import {
+    useLocation,
+    useNavigate,
+    useParams,
+} from "react-router-dom";
 
-class ThingsToDo extends React.Component {
+class ViewPosts extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             data: [],
             loaded: false
@@ -19,7 +24,7 @@ class ThingsToDo extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "postType": 'things-to-do'
+                "postType": this.props.router.params.postType
             })
         }).then(res => res.json())
             .then( posts => {
@@ -33,7 +38,7 @@ class ThingsToDo extends React.Component {
     render() {
         return(
             <div>
-                <h2>Things to do in Prague</h2>
+                <h2>View Posts</h2>
                 <div className="things-to-do-parent">
                     <>
                         {
@@ -47,5 +52,21 @@ class ThingsToDo extends React.Component {
     }
 }
 
+//https://reactrouter.com/en/v6.3.0/faq
+function withRouter(Component) {
+    function ComponentWithRouterProp(props) {
+        let location = useLocation();
+        let navigate = useNavigate();
+        let params = useParams();
+        return (
+            <Component
+                {...props}
+                router={{ location, navigate, params }}
+            />
+        );
+    }
 
-export default ThingsToDo;
+    return ComponentWithRouterProp;
+}
+
+export default withRouter(ViewPosts);
