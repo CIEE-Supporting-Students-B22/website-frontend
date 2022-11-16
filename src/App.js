@@ -5,6 +5,8 @@ import React from 'react';
 import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 import AdminPanel from "./pages/AdminPanel.js";
 import ViewPosts from "./pages/ViewPosts";
+import {NewPost} from "./components/NewPost";
+import {DetailedPost} from "./pages/DetailedPost";
 
 function App() {
 
@@ -16,6 +18,8 @@ function App() {
                   <Route path="/" element={<Homepage/>} />
                   <Route path="view-posts/:postType" element={<ViewPosts />}/>
                   <Route path="/admin-panel" element={<AdminPanel />} />
+                  <Route path="/newPost/:postType" element={<NewPost />}/>
+                  <Route path="/post/:id" element={<DetailedPost />}/>
               </Routes>
           </div>
       </BrowserRouter>

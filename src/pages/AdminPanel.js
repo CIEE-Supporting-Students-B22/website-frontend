@@ -22,7 +22,7 @@ class AdminPanel extends React.Component {
                 });
             }
         )
-        }
+    }
 
     render() {
         return (
