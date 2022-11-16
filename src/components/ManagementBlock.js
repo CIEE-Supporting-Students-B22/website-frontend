@@ -1,5 +1,6 @@
 import React from "react";
 import './styles/ManagementBlock.css'
+import {Link} from "react-router-dom";
 
 class ManagementBlock extends React.Component {
 
@@ -69,6 +70,7 @@ class ManagementBlock extends React.Component {
                         <button type="submit">Remove Post</button>
                     </form>
                 </>
+                <Link to={"/newPost/"+this.props.postType}>Create new post</Link>
             </div>
         )
     }
