@@ -1,12 +1,12 @@
 import logo from './assets/CIEE_Logo.jpg';
 import './App.css';
-import Homepage from './pages/Homepage.js'
+import Homepage from './pages/Homepage/Homepage.js'
 import React from 'react';
 import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
-import AdminPanel from "./pages/AdminPanel.js";
-import ViewPosts from "./pages/ViewPosts";
-import {NewPost} from "./components/NewPost";
-import {DetailedPost} from "./pages/DetailedPost";
+
+import { AdminPanel, ViewPosts, DetailedPost } from "./pages";
+import { NewPost } from "./components";
+
 
 function App() {
 

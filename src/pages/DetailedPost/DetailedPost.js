@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import "./styles/DetailedPost.css";
-import exampleImage from "../assets/Site T-Shirt_Prague.png";
+import "./DetailedPost.css";
+import exampleImage from "../../assets/Site T-Shirt_Prague.png";
 import {useParams} from "react-router-dom";
 
 export function DetailedPost(props) {
@@ -24,9 +24,9 @@ export function DetailedPost(props) {
     return (
         <div className="">
             <h1>{postData.title}</h1>
-            <p>{postData.description}</p>
+            <h3>{postData.shortDescription}</h3>
             <img src={exampleImage} alt="Example" width="25%"/>
-            <p>Example Image</p>
+            <p>{postData.description}</p>
         </div>
     )
 }

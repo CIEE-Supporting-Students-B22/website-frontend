@@ -1,5 +1,5 @@
 import React from "react";
-import './styles/ManagementBlock.css'
+import './ManagementBlock.css'
 import {Link} from "react-router-dom";
 
 class ManagementBlock extends React.Component {
@@ -64,7 +64,7 @@ class ManagementBlock extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <select name="post" id={this.props.postType} onChange={this.handleChange}>
                     {
-                        this.state.data.map(d => <option value={d._id}>{d.title}</option>)
+                        this.state.data.map(d => <option key={d._id} value={d._id}>{d.title}</option>)
                     }
                         </select>
                         <button type="submit">Remove Post</button>

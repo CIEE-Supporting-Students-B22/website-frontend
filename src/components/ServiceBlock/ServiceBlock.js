@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/ServiceBlock.css";
+import "./ServiceBlock.css";
 
 export class ServiceBlock extends React.Component {
 
