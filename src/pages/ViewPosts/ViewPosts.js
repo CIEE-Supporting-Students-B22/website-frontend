@@ -1,6 +1,6 @@
 import React from "react";
-import PostBlock from "../components/PostBlock";
-import './styles/ViewPosts.css';
+import './ViewPosts.css';
+import {PostBlock} from "../../components";
 import {
     useLocation,
     useNavigate,
@@ -42,7 +42,7 @@ class ViewPosts extends React.Component {
                 <div className="things-to-do-parent">
                     <>
                         {
-                            this.state.loaded ? this.state.data.map(post => <PostBlock title={post.title} description={post.description} _id={post._id}/>) :
+                            this.state.loaded ? this.state.data.map(post => <PostBlock key={post._id} title={post.title} description={post.shortDescription} _id={post._id}/>) :
                                 <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>
                         }
                     </>

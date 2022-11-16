@@ -1,6 +1,0 @@
-.using-services-parent {
-    display:grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: 2%;
-    justify-content: space-evenly;
-}

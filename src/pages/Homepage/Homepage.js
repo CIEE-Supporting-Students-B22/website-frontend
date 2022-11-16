@@ -1,5 +1,5 @@
 import React from "react";
-import './styles/Homepage.css';
+import './Homepage.css';
 import { Link } from "react-router-dom";
 
 class Homepage extends React.Component {
@@ -28,7 +28,7 @@ class Homepage extends React.Component {
             <div className="homepage-parent">
                 <>
                     {
-                        this.state.loaded ? this.state.data.map(post => <Link className="column-div" to={"/view-posts/"+post.postType}>{post.title}</Link>) :
+                        this.state.loaded ? this.state.data.map(post => <Link className="column-div" key={post._id} to={"/view-posts/"+post.postType}>{post.title}</Link>) :
                             <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>
                     }
                 </>

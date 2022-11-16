@@ -1,0 +1,12 @@
+.things-to-do-parent {
+    justify-content: center;
+    width:100%;
+}
+
+@media (orientation: landscape) {
+    .things-to-do-parent {
+        display:grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 2%;
+    }
+}

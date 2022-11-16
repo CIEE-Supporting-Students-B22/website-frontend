@@ -1,6 +1,7 @@
 .postDiv {
     border: 1px solid black;
     flex: 1;
+    margin-bottom: 0.5em;
 }
 
 .postDiv:hover {
