@@ -1,0 +1,9 @@
+.detailed-image {
+
+}
+
+@media (orientation: portrait) {
+    .detailed-image {
+        width: 85%;
+    }
+}
