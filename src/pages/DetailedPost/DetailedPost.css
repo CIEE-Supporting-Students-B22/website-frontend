@@ -1,5 +1,6 @@
 .detailed-image {
-
+    max-width: 90%;
+    max-height: 90%;
 }
 
 @media (orientation: portrait) {

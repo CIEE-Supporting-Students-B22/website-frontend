@@ -1,18 +1,18 @@
-.column-div {
+.homepage-links {
     background-color: #005CB9;
     border: 4px solid #FF5F00;
     padding: 5% 5%;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5em;
     color:white;
     text-decoration: none;
 }
 
-.column-div:hover {
+.homepage-links:hover {
     background-color: #0256a8;
 }
 
-.column-div:active {
+.homepage-links:active {
     background-color: #004381;
 }
 
@@ -20,4 +20,12 @@
     display:grid;
     grid-auto-columns: minmax(0, 1fr);
     grid-gap: 5px;
+}
+
+@media (orientation: portrait) {
+    .homepage-parent {
+        display:grid;
+        grid-auto-columns: minmax(0, 1fr);
+        grid-gap: 0.75em;
+    }
 }

@@ -25,7 +25,7 @@ export function DetailedPost(props) {
         <div className="">
             <h1>{postData.title}</h1>
             <h3>{postData.shortDescription}</h3>
-            <img className="detailed-image" src={"/getImage?_id="+id} alt="Example" width="25%"/>
+            <img className="detailed-image" src={"/getImage?_id="+id} alt="" width="25%"/>
             <p>{postData.description}</p>
         </div>
     )
