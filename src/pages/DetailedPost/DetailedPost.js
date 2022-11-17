@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./DetailedPost.css";
-import exampleImage from "../../assets/Site T-Shirt_Prague.png";
+//import exampleImage from "../../assets/Site T-Shirt_Prague.png";
 import {useParams} from "react-router-dom";
 
 export function DetailedPost(props) {
@@ -19,13 +19,13 @@ export function DetailedPost(props) {
             })
         }).then(data => data.json())
             .then(d => setPostData(d))
-    })
+    }, [])
 
     return (
         <div className="">
             <h1>{postData.title}</h1>
             <h3>{postData.shortDescription}</h3>
-            <img src={exampleImage} alt="Example" width="25%"/>
+            <img className="detailed-image" src={"/getImage?_id="+id} alt="Example" width="25%"/>
             <p>{postData.description}</p>
         </div>
     )
