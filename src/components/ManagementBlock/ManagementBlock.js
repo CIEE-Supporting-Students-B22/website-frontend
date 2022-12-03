@@ -76,8 +76,18 @@ class ManagementBlock extends React.Component {
                         this.state.data.map(d => <option key={d._id} value={d._id}>{d.title}</option>)
                     }
                         </select>
-                        <button type="submit">Remove Post</button>
-                        <button onClick={this.handleEdit}>Edit Post</button>
+                        {
+                            this.state.value === '' ?
+                                <>
+                                    <button type="submit" disabled>Remove Post</button>
+                                    <button onClick={this.handleEdit} disabled>Edit Post</button>
+                                </>
+                                :
+                                <>
+                                    <button type="submit">Remove Post</button>
+                                    <button onClick={this.handleEdit}>Edit Post</button>
+                                </>
+                        }
                     </form>
                 </>
                 <Link to={"/newPost/"+this.props.postType}>Create new post</Link>
