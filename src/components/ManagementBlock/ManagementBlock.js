@@ -14,6 +14,7 @@ class ManagementBlock extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     componentDidMount() {
@@ -56,6 +57,14 @@ class ManagementBlock extends React.Component {
         }
     }
 
+    handleEdit(event) {
+        event.preventDefault();
+        console.log(this.state);
+        if (this.state.loaded) {
+            window.location.href = "/editPost/"+this.state.value;
+        }
+    }
+
     render() {
         return (
             <div className="page-management">
@@ -68,6 +77,7 @@ class ManagementBlock extends React.Component {
                     }
                         </select>
                         <button type="submit">Remove Post</button>
+                        <button onClick={this.handleEdit}>Edit Post</button>
                     </form>
                 </>
                 <Link to={"/newPost/"+this.props.postType}>Create new post</Link>

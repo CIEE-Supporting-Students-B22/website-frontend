@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import "./DetailedPost.css";
-//import exampleImage from "../../assets/Site T-Shirt_Prague.png";
 import {useParams} from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
 
 export function DetailedPost(props) {
     const id = useParams().id;
@@ -22,11 +23,11 @@ export function DetailedPost(props) {
     }, [])
 
     return (
-        <div className="">
+        <div className="detailed-post-class">
             <h1>{postData.title}</h1>
             <h3>{postData.shortDescription}</h3>
             <img className="detailed-image" src={"/getImage?_id="+id} alt="" width="25%"/>
-            <p>{postData.description}</p>
+            <ReactMarkdown className="md-content"  remarkPlugins={[gfm]}>{postData.description}</ReactMarkdown>
         </div>
     )
 }
