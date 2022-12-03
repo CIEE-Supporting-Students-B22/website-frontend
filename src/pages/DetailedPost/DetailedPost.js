@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from "react";
 import "./DetailedPost.css";
-//import exampleImage from "../../assets/Site T-Shirt_Prague.png";
 import {useParams} from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
 
 export function DetailedPost(props) {
     const id = useParams().id;
 
     const [postData, setPostData] = useState({});
+    const [imageLinks, setImageLinks] = useState([]);
 
     useEffect(() => {
         fetch('/getPost', {
@@ -19,14 +21,23 @@ export function DetailedPost(props) {
             })
         }).then(data => data.json())
             .then(d => setPostData(d))
+
+        fetch('/getImages?_id='+id)
+            .then(data => data.json())
+            .then(links => setImageLinks(links))
+
     }, [])
 
     return (
-        <div className="">
+        <div className="detailed-post-class">
             <h1>{postData.title}</h1>
             <h3>{postData.shortDescription}</h3>
-            <img className="detailed-image" src={"/getImage?_id="+id} alt="" width="25%"/>
-            <p>{postData.description}</p>
+            <>
+                {
+                    imageLinks.map(image => <img key="" className="detailed-image" src={"/getImage?pathname="+image} alt="" width="25%"/>)
+                }
+            </>
+            <ReactMarkdown className="md-content"  remarkPlugins={[gfm]}>{postData.description}</ReactMarkdown>
         </div>
     )
 }

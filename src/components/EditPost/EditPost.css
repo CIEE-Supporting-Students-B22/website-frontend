@@ -1,0 +1,11 @@
+input, textarea {
+    display: block;
+    padding: 1em;
+    width: 25%;
+    min-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;
+    border: 2px solid #FF5F00;
+    border-radius:4px;
+}

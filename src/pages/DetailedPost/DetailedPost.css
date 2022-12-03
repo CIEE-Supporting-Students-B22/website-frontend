@@ -3,6 +3,14 @@
     max-height: 90%;
 }
 
+.md-content {
+    text-align: left;
+}
+
+table, tr, td, th {
+    border: 1px solid black;
+}
+
 @media (orientation: portrait) {
     .detailed-image {
         width: 85%;
