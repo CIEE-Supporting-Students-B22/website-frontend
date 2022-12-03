@@ -11,6 +11,7 @@ export function EditPost(props) {
         title: '',
         shortDescription: '',
         description: '',
+        postImage: [],
         loaded: false
     })
 
@@ -26,12 +27,12 @@ export function EditPost(props) {
         }).then(data => data.json())
             .then(d => {
                 setInitData(d)
-            }).then(console.log(initData))
+            })
     }, [])
 
     const changeHandler = e => {
         if (e.target.files) {
-            setInitData({...initData, [e.target.name]: e.target.files[0]});
+            setInitData({...initData, [e.target.name]: e.target.files, numOfImages: e.target.files.length});
         }
         else setInitData({...initData, [e.target.name]: e.target.value});
     }
@@ -40,13 +41,19 @@ export function EditPost(props) {
         e.preventDefault();
         let formData = new FormData();
         for (let key in initData) {
-            formData.append(key, initData[key]);
+            if (key === 'postImage') {
+                for (let i=0;i<initData[key].length;i++) {
+                    formData.append(key, initData[key][i]);
+                }
+            }
+            else formData.append(key, initData[key]);
         }
         fetch('/editPost', {
             method: 'POST',
             body: formData
         }).then( r => r.json())
-            .then(r => window.location.href = "/post/"+r._id)
+            .then(console.log(formData))
+            //.then(r => window.location.href = "/post/"+r._id)
 
     }
 
@@ -56,7 +63,7 @@ export function EditPost(props) {
             <label>Title:</label>
             <input type="text" name="title" defaultValue={initData.title} onChange={changeHandler}/>
             <label>Replace Image: </label>
-            <input type="file" name="postImage" accept="image/png, image/jpeg" onChange={changeHandler}/>
+            <input type="file" name="postImage" accept="image/png, image/jpeg" onChange={changeHandler} multiple/>
             <label>Short Description:</label>
             <input type="text" name="shortDescription" value={initData.shortDescription} onChange={changeHandler}/>
             <label>Full Description: </label>
