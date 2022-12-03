@@ -8,11 +8,12 @@ export function NewPost(props) {
         postType: useParams().postType,
         title: '',
         shortDescription: '',
+        numOfImages: 0,
         postImage: new File([], "", undefined)
     });
     const changeHandler = e => {
         if (e.target.files) {
-            setAllValues({...allValues, [e.target.name]: e.target.files[0]});
+            setAllValues({...allValues, [e.target.name]: e.target.files[0], numOfImages: e.target.files.length});
         }
         else setAllValues({...allValues, [e.target.name]: e.target.value});
     }
