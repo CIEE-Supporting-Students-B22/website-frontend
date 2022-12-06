@@ -43,7 +43,7 @@ class ManagementBlock extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.state.loaded) {
-            fetch('/removePost', {
+            fetch('/adminRemovePost', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

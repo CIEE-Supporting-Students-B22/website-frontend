@@ -48,12 +48,11 @@ export function EditPost(props) {
             }
             else formData.append(key, initData[key]);
         }
-        fetch('/editPost', {
+        fetch('/adminEditPost', {
             method: 'POST',
             body: formData
         }).then( r => r.json())
-            .then(console.log(formData))
-            //.then(r => window.location.href = "/post/"+r._id)
+            .then(r => window.location.href = "/post/"+r._id)
 
     }
 
