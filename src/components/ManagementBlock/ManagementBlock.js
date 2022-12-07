@@ -14,6 +14,7 @@ class ManagementBlock extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     componentDidMount() {
@@ -42,7 +43,7 @@ class ManagementBlock extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.state.loaded) {
-            fetch('/removePost', {
+            fetch('/adminRemovePost', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -53,6 +54,14 @@ class ManagementBlock extends React.Component {
             }).then( res => {
                 if (res.ok) window.location.reload()
             })
+        }
+    }
+
+    handleEdit(event) {
+        event.preventDefault();
+        console.log(this.state);
+        if (this.state.loaded) {
+            window.location.href = "/editPost/"+this.state.value;
         }
     }
 
@@ -67,7 +76,18 @@ class ManagementBlock extends React.Component {
                         this.state.data.map(d => <option key={d._id} value={d._id}>{d.title}</option>)
                     }
                         </select>
-                        <button type="submit">Remove Post</button>
+                        {
+                            this.state.value === '' ?
+                                <>
+                                    <button type="submit" disabled>Remove Post</button>
+                                    <button onClick={this.handleEdit} disabled>Edit Post</button>
+                                </>
+                                :
+                                <>
+                                    <button type="submit">Remove Post</button>
+                                    <button onClick={this.handleEdit}>Edit Post</button>
+                                </>
+                        }
                     </form>
                 </>
                 <Link to={"/newPost/"+this.props.postType}>Create new post</Link>
