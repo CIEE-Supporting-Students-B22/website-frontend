@@ -45,6 +45,14 @@ class AdminPanel extends React.Component {
                         <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>}
                     </>
                 </div>
+                <h2>Add pages</h2>
+                <>
+                <form action="/adminAddPage" method="POST">
+                    <input type="text" name="title" placeholder="Name of page" />
+                    <input type="text" name="postType" placeholder="identifier" />
+                    <input type="submit"/>
+                </form>
+                </>
             </div>
         )
         else return <h1>Checking Authorization</h1>
