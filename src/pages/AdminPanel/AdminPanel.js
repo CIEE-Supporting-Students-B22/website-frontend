@@ -45,7 +45,7 @@ class AdminPanel extends React.Component {
                         <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>}
                     </>
                 </div>
-                <h2>Add pages</h2>
+                <h2>Add page</h2>
                 <>
                 <form action="/adminAddPage" method="POST">
                     <input type="text" name="title" placeholder="Name of page" />
