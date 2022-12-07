@@ -12,9 +12,10 @@ class Homepage extends React.Component {
         }
     }
 
+    //load page
     componentDidMount() {
-        fetch('/pageTypes')
-            .then(res => res.json())
+        fetch('/pageTypes') //request to server, asynchronous
+            .then(res => res.json()) //parser
             .then( links => {
                 this.setState({
                     data: links,
@@ -27,7 +28,7 @@ class Homepage extends React.Component {
         return (
             <div className="homepage-parent">
                 <>
-                    {
+                    {   //creating tags
                         this.state.loaded ? this.state.data.map(post => <Link className="column-div" key={post._id} to={"/view-posts/"+post.postType}>{post.title}</Link>) :
                             <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>
                     }
@@ -40,6 +41,7 @@ class Homepage extends React.Component {
                 <Link className="column-div" to="/view-posts/upcoming-trips">Upcoming trips offered by CIEE Prague</Link>
                 <Link className="column-div" to="/admin-panel">Admin Panel (Temporary for Development Purposes)</Link>
                 */}
+
             </div>
         );
     }

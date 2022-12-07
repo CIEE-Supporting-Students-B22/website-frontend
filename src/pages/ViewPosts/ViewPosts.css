@@ -3,9 +3,17 @@
     width:100%;
 }
 
+.container
+{
+        width: 200px;
+        padding: 20px;
+        background: #eee;
+        border: 1px solid black;
+}
+
 @media (orientation: landscape) {
     .things-to-do-parent {
-        display:grid;
+        display: inline-block;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         grid-gap: 2%;
     }
