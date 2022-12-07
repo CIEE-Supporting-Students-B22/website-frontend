@@ -30,7 +30,7 @@ export function NewPost(props) {
             }
             else formData.append(key, allValues[key]);
         }
-        fetch('/addPost', {
+        fetch('/adminAddPost', {
             method: 'POST',
             body: formData
         }).then( r => r.json())

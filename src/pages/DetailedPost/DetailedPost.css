@@ -5,14 +5,24 @@
 
 .md-content {
     text-align: left;
+    margin: 2.5% 5% 5%;
 }
 
 table, tr, td, th {
     border: 1px solid black;
 }
 
+img {
+    width: 25%;
+}
+
 @media (orientation: portrait) {
     .detailed-image {
         width: 85%;
     }
+
+    .md-content {
+        margin: 2.5% 5% 10%;
+    }
+
 }

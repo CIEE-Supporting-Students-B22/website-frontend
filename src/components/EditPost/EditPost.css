@@ -9,3 +9,22 @@ input, textarea {
     border: 2px solid #FF5F00;
     border-radius:4px;
 }
+
+textarea {
+    width: 50%;
+}
+
+.prev-img {
+    cursor: pointer;
+    width:75%;
+}
+
+.removeDiv {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.rowDiv {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
