@@ -9,12 +9,13 @@ class ManagementBlock extends React.Component {
         this.state = {
             value: '',
             data: [],
-            loaded: false
+            loaded: false,
+            postType: this.props.postType
         };
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.removePage = this.removePage.bind(this);
     }
 
     componentDidMount() {
@@ -31,7 +32,8 @@ class ManagementBlock extends React.Component {
                 this.setState({
                     value: options.length>0 ? options[0]._id : this.state.value,
                     data: options,
-                    loaded: true
+                    loaded: true,
+                    postType: this.state.postType
                 })
             })
     }
@@ -59,9 +61,23 @@ class ManagementBlock extends React.Component {
 
     handleEdit(event) {
         event.preventDefault();
-        console.log(this.state);
         if (this.state.loaded) {
             window.location.href = "/editPost/"+this.state.value;
+        }
+    }
+
+    removePage(event) {
+        event.preventDefault();
+        if (window.confirm("Are you sure you want to delete this page?") && this.state.loaded) {
+            fetch('/adminRemovePage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "postType": this.state.postType
+                })
+            }).then(() => window.location.reload())
         }
     }
 
@@ -91,6 +107,7 @@ class ManagementBlock extends React.Component {
                     </form>
                 </>
                 <Link to={"/newPost/"+this.props.postType}>Create new post</Link>
+                <button onClick={this.removePage}>Remove Page</button>
             </div>
         )
     }
