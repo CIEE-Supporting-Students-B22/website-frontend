@@ -14,13 +14,14 @@ export function EditPost(props) {
         loaded: false
     })
 
-    const [reloadData,setReloadData] = useState(0);
+    const [reloadData,setReloadData] = useState(0); // used to trigger useEffect to reload the images
 
     const [imageLinks, setImageLinks] = useState([]);
 
     const textAreaRef = useRef(null);
 
     useEffect(() => {
+        if (reloadData === 0) {
         fetch('/getPost', {
             method: 'POST',
             headers: {
@@ -33,6 +34,7 @@ export function EditPost(props) {
             .then(d => {
                 setInitData(d)
             })
+        }
 
         fetch('/getImages?_id='+initData._id)
             .then(data => data.json())

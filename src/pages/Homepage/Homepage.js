@@ -32,7 +32,7 @@ class Homepage extends React.Component {
                             <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>
                     }
                 </>
-                <Link className="homepage-links" to="/admin-panel">Admin Panel (Temporary for Development Purposes)</Link>
+                <Link className="homepage-links" to="/admin-panel">Management Panel</Link>
             </div>
         );
     }

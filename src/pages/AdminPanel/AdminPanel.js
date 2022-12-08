@@ -49,8 +49,8 @@ class AdminPanel extends React.Component {
                 <>
                 <form action="/adminAddPage" method="POST">
                     <input type="text" name="title" placeholder="Name of page" />
-                    <input type="text" name="postType" placeholder="identifier" />
-                    <input type="submit"/>
+                    <input type="text" name="postType" placeholder="Identifier" />
+                    <input type="submit" value="Add Page"/>
                 </form>
                 </>
             </div>
