@@ -1,6 +1,10 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
 import "./EditPost.css";
+import {Editor, EditorState} from 'draft-js';
+import 'draft-js/dist/Draft.css';
+import {stateToHTML} from 'draft-js-export-html';
+import ContentState from "draft-js/lib/ContentState";
 
 export function EditPost(props) {
 
@@ -9,7 +13,7 @@ export function EditPost(props) {
         postType: '',
         title: '',
         shortDescription: '',
-        description: '',
+        description: EditorState.createEmpty(),
         postImage: [],
         loaded: false
     })
@@ -32,7 +36,12 @@ export function EditPost(props) {
             })
         }).then(data => data.json())
             .then(d => {
-                setInitData(d)
+                const blocksFromHTML = require('draft-js').convertFromHTML(d.description);
+                const descriptionDraft = ContentState.createFromBlockArray(
+                    blocksFromHTML.contentBlocks,
+                    blocksFromHTML.entityMap,
+                );
+                setInitData({...d, description: EditorState.createWithContent(descriptionDraft)})
             })
         }
 
@@ -50,6 +59,7 @@ export function EditPost(props) {
 
     const submitHandler = e => {
         e.preventDefault();
+        let content = stateToHTML(initData.description.getCurrentContent()).toString();
         let formData = new FormData();
         for (let key in initData) {
             if (key === 'postImage') {
@@ -57,6 +67,7 @@ export function EditPost(props) {
                     formData.append(key, initData[key][i]);
                 }
             }
+            else if (key === 'description') formData.append(key, content);
             else formData.append(key, initData[key]);
         }
         fetch('/adminEditPost', {
@@ -107,6 +118,10 @@ export function EditPost(props) {
         }
     }
 
+    const changeDesc = e => {
+        setInitData({...initData, description: e});
+    }
+
 
     return (
         <div>
@@ -118,7 +133,10 @@ export function EditPost(props) {
                 <label>Short Description:</label>
                 <input type="text" name="shortDescription" value={initData.shortDescription} onChange={changeHandler}/>
                 <label>Full Description: </label>
-                <textarea name="description" value={initData.description} rows="20" onChange={changeHandler} ref={textAreaRef} />
+                {/*<textarea name="description" value={initData.description} rows="20" onChange={changeHandler} ref={textAreaRef} />*/}
+                <Editor editorState={initData.description} onChange={changeDesc}   toolbarClassName="toolbarClassName"
+                        wrapperClassName="wrapperClassName"
+                        editorClassName="editorClassName"/>
                 <button onClick={submitHandler}>Edit post</button>
             </form>
             <p>Insert an uploaded image:</p>
