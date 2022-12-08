@@ -8,34 +8,54 @@ class AdminPanel extends React.Component {
         super();
         this.state = {
             data : [],
-            loaded: false
+            loaded: false,
+            authorized: false
         }
     }
 
     componentDidMount() {
+        fetch('/loggedIn').then( response => {
+            if (response.status === 200) this.setState({
+                loaded: this.state.loaded,
+                data: this.state.data,
+                authorized: true
+            })
+            else window.location.href = "/login";
+        })
+
         fetch('/pageTypes')
             .then(res => res.json())
             .then( (loadedData) => {
                 this.setState({
                     loaded: true,
-                    data: loadedData
+                    data: loadedData,
+                    authorized: this.state.authorized
                 });
             }
         )
     }
 
     render() {
-        return (
+        if (this.state.authorized) return (
             <div>
                 <h2>Current posts</h2>
                 <div className="managed-pages">
                     <>
-                        {this.state.loaded ? this.state.data.map(d => <ManagementBlock key={d._id} title={d.title} postType={d.postType} />) :
+                        {this.state.loaded && this.state.authorized ? this.state.data.map(d => <ManagementBlock key={d._id} title={d.title} postType={d.postType} />) :
                         <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>}
                     </>
                 </div>
+                <h2>Add page</h2>
+                <>
+                <form action="/adminAddPage" method="POST">
+                    <input type="text" name="title" placeholder="Name of page" />
+                    <input type="text" name="postType" placeholder="Identifier" />
+                    <input type="submit" value="Add Page"/>
+                </form>
+                </>
             </div>
         )
+        else return <h1>Checking Authorization</h1>
     }
 }
 

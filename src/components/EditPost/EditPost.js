@@ -1,8 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
 import "./EditPost.css";
-import ReactDOM from 'react-dom';
-
 
 export function EditPost(props) {
 
@@ -16,11 +14,14 @@ export function EditPost(props) {
         loaded: false
     })
 
+    const [reloadData,setReloadData] = useState(0); // used to trigger useEffect to reload the images
+
     const [imageLinks, setImageLinks] = useState([]);
 
     const textAreaRef = useRef(null);
 
     useEffect(() => {
+        if (reloadData === 0) {
         fetch('/getPost', {
             method: 'POST',
             headers: {
@@ -33,12 +34,12 @@ export function EditPost(props) {
             .then(d => {
                 setInitData(d)
             })
+        }
 
         fetch('/getImages?_id='+initData._id)
             .then(data => data.json())
             .then(links => setImageLinks(links))
-
-    }, [])
+    }, [reloadData])
 
     const changeHandler = e => {
         if (e.target.files) {
@@ -63,7 +64,24 @@ export function EditPost(props) {
             body: formData
         }).then( r => r.json())
             .then(r => window.location.href = "/post/"+r._id)
+    }
 
+    const imageUploader = e => {
+        console.log('image uploading')
+        let selectedFiles = e.target.files;
+        let formData = new FormData();
+        for (let i=0;i<selectedFiles.length;i++) {
+            formData.append('postImage', selectedFiles[i]);
+        }
+        formData.append('postID', initData._id);
+        fetch('/adminSubmitImage', {
+            method: 'POST',
+            body: formData
+        }).then( () => {
+            setReloadData(reloadData+1);
+        }).then( () => {
+            e.target.value="";
+        })
     }
 
     function onImageClicked(imageSrc) {
@@ -73,21 +91,20 @@ export function EditPost(props) {
         setInitData({...initData, description: textAreaRef.current.value});
     }
 
-    function removeImage(imageSrc, e) {
-        fetch('/adminRemoveImage', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify({'path': imageSrc})
-        })
-        ReactDOM.findDOMNode(e.target).parentNode.remove();
-        console.log("![]("+imageSrc+")");
-        console.log(textAreaRef.current.value.length);
-        textAreaRef.current.value = initData.description.replaceAll("![](/getImage?pathname="+imageSrc+")", '');
-        console.log(textAreaRef.current.value.length);
-        setInitData({...initData, description: textAreaRef.current.value});
+    async function removeImage(imageSrc, e) {
+        if (window.confirm("Are you sure you want to remove this image?")) {
+            fetch('/adminRemoveImage', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({'path': imageSrc})
+            })
+            textAreaRef.current.value = initData.description.replaceAll("![](/getImage?pathname="+imageSrc+")", '');
+            setInitData({...initData, description: textAreaRef.current.value});
+            setReloadData(reloadData+1);
+        }
     }
 
 
@@ -97,25 +114,23 @@ export function EditPost(props) {
                 <label>Title:</label>
                 <input type="text" name="title" defaultValue={initData.title} onChange={changeHandler}/>
                 <label>Replace Image: </label>
-                <input type="file" name="postImage" accept="image/png, image/jpeg" onChange={changeHandler} multiple/>
+                <input type="file" name="postImage" accept="image/png, image/jpeg" onChange={imageUploader} multiple/>
                 <label>Short Description:</label>
                 <input type="text" name="shortDescription" value={initData.shortDescription} onChange={changeHandler}/>
                 <label>Full Description: </label>
                 <textarea name="description" value={initData.description} rows="20" onChange={changeHandler} ref={textAreaRef} />
                 <button onClick={submitHandler}>Edit post</button>
             </form>
-            <p>Insert an image:</p>
-            <div className="rowDiv">
+            <p>Insert an uploaded image:</p>
+            <div key="images" className="rowDiv">
                 <>
                     {
                         imageLinks.map(image => {
                             return (
-                            <React.Fragment key={image}>
-                                <div className="removeDiv">
+                                <div className="removeDiv" key={image}>
                                     <img onClick={() => onImageClicked("/getImage?pathname=" + image)} className="prev-img" src={"/getImage?pathname=" + image} alt=""/>
                                     <button onClick={(e) => removeImage(image, e)}>Remove Image</button>
                                 </div>
-                            </React.Fragment>
                             )
                         })
                     }
