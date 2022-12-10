@@ -2,3 +2,11 @@
     border: 3px solid #FF5F00;
     display: inline;
 }
+
+.Edit Post
+{
+    border: 3px solid #FF5F00;
+    display: inline;
+    width: 5vw;
+    height: 5vh;
+}
