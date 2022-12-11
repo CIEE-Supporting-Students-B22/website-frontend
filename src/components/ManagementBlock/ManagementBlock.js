@@ -96,56 +96,35 @@ class ManagementBlock extends React.Component {
                         this.state.data.map(d => <option key={d._id} value={d._id}>{d.title}</option>)
                     }
                         </select>
+                        <br/>
                         {
                             this.state.value === '' ?
                                 <>
-                                    <button
-                                        style={{
-                                            color: "black",
-                                            fontFamily: "Verdana",
-                                            width: "200px",
-                                            height: "20px"
-                                        }}type="submit" disabled>Remove Post</button>
-                                    <button onClick={this.handleEdit} disabled>Edit Post</button>
+                                    <button className="removePostButton" type="submit" disabled>Remove Post</button>
+                                    <button className="editPostButton" onClick={this.handleEdit} disabled>Edit Post</button>
                                 </>
                                 :
                                 <>
-                                    <button
-                                        style={{
-                                           color: "black",
-                                            fontFamily: "Verdana",
-                                            width: "150px",
-                                            height: "25px"
-                                        }}
-                                        type="submit"
-                                    >Remove Post</button>
-                                    <button style={{
-                                        color: "black",
-                                        fontFamily: "Verdana",
-                                        width: "150px",
-                                        height: "25px",
-                                    }}onClick={this.handleEdit}>Edit Post</button>
+                                    <button type="submit" className="removePostButton">Remove Post</button>
+                                    <button className="editPostButton" onClick={this.handleEdit}>Edit Post</button>
                                 </>
                         }
                     </form>
                 </>
                 <Link to={"/newPost/"+this.props.postType}>
-                    <button
-                        style={{
-                            color: "black",
-                            fontFamily: "Verdana",
-                            width: "150px",
-                            height: "25px",
-                        }}>
+                    <button className="editPostButton">
                         Create new post
                 </button></Link>
-                <button
-                    style={{
-                        color: "black",
-                        fontFamily: "Verdana",
-                        width: "150px",
-                        height: "25px",
-                    }}onClick={this.removePage}>Remove Page</button>
+                {
+                    this.state.value === '' ?
+                        <>
+                            <button className="removePostButton" onClick={this.removePage}>Remove Page</button>
+                        </>
+                        :
+                        <>
+                            <button className="removePostButton" onClick={this.removePage} disabled>Remove Page</button>
+                        </>
+                }
             </div>
         )
     }

@@ -33,14 +33,7 @@ class Homepage extends React.Component {
                             <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>
                     }
                 </>
-                <Link className="column-div" to="/admin-panel"> Admin Panel (Temporary for Development Purposes)</Link>
-                {/*
-                <Link className="column-div" to="/view-posts/things-to-do">Things to do</Link>
-                <Link className="column-div" to="/view-posts/language-prep">Language Prep</Link>
-                <Link className="column-div" to="/view-posts/using-services">Utilizing Services in the Czech Republic</Link>
-                <Link className="column-div" to="/view-posts/upcoming-trips">Upcoming trips offered by CIEE Prague</Link>
-                <Link className="column-div" to="/admin-panel">Admin Panel (Temporary for Development Purposes)</Link>
-                */}
+                <Link className="homepage-links" to="/admin-panel">Admin Panel</Link>
             </div>
         );
     }

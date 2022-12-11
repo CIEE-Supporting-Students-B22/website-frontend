@@ -1,11 +1,6 @@
 .managed-pages {
     display:grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 2%;
     justify-content: space-evenly;
-}
-
-.button
-{
-
 }

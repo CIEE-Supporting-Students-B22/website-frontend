@@ -41,7 +41,7 @@ class AdminPanel extends React.Component {
                 <h2>Current posts</h2>
                 <div className="managed-pages">
                     <>
-                        {this.state.loaded && this.state.authorized ? this.state.data.map(d => <ManagementBlock key={d._id} title={d.title} postType={d.postType} />) :
+                        {this.state.loaded && this.state.authorized ? this.state.data.map(d => <ManagementBlock className="manageBlocks" key={d._id} title={d.title} postType={d.postType} />) :
                         <h1 style={{position: "absolute", left:0, right:0, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>Loading</h1>}
                     </>
                 </div>
@@ -49,8 +49,7 @@ class AdminPanel extends React.Component {
                 <>
                 <form action="/adminAddPage" method="POST">
                     <input type="text" name="title" placeholder="Name of page" />
-                    <input type="text" name="postType" placeholder="Identifier" />
-                    <input type="submit" value="Add Page"/>
+                    <button type="submit">Add Page</button>
                 </form>
                 </>
             </div>

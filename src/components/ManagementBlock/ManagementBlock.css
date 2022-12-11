@@ -10,3 +10,21 @@
     width: 5vw;
     height: 5vh;
 }
+
+button {
+    margin: .2em;
+}
+
+.removePostButton {
+    color: black;
+    fontFamily: "Verdana";
+    width: 45%;
+    height: 20px;
+}
+
+.editPostButton {
+    color: black;
+    fontFamily: "Verdana";
+    width: 45%;
+    height: 20px;
+}
